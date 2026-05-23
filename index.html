@@ -1,0 +1,2508 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Tours & Travel — Speed Beyond Limits</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --accent: #FF4D00;
+            --accent2: #FFB800;
+            --bg: #0A0A0A;
+            --bg2: #111111;
+            --bg3: #1A1A1A;
+            --surface: #1E1E1E;
+            --surface2: #252525;
+            --text: #F5F0E8;
+            --text2: #A89F8C;
+            --text3: #6B6459;
+            --border: rgba(255, 255, 255, 0.07);
+            --card-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 60px rgba(255, 77, 0, 0.15);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        [data-theme="light"] {
+            --bg: #FAF8F5;
+            --bg2: #F0EDE8;
+            --bg3: #E8E4DE;
+            --surface: #FFFFFF;
+            --surface2: #F5F2ED;
+            --text: #1A1714;
+            --text2: #5C5248;
+            --text3: #9C9088;
+            --border: rgba(0, 0, 0, 0.08);
+            --card-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+            --glow: 0 0 60px rgba(255, 77, 0, 0.08);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 72px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.4s, border 0.4s;
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(250, 248, 245, 0.9);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-bolt {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            clip-path: polygon(50% 0%, 100% 25%, 75% 50%, 100% 50%, 30% 100%, 45% 60%, 0% 60%, 30% 25%);
+            animation: pulse-bolt 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-bolt {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: 0.85;
+                transform: scale(1.08)
+            }
+        }
+
+        .logo-text {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: -0.5px;
+            color: var(--text);
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text2);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            width: 44px;
+            height: 24px;
+            background: var(--surface2);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent);
+            transition: transform 0.3s;
+        }
+
+        [data-theme="light"] .theme-toggle::after {
+            transform: translateX(20px);
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 10px 22px;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s;
+            letter-spacing: 0.2px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #ff6520;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(255, 77, 0, 0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 72px 5% 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+            filter: brightness(0.2);
+            transition: filter 0.4s;
+        }
+
+        [data-theme="light"] .hero-bg {
+            filter: brightness(0.55);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.7) 0%, transparent 60%, rgba(255, 77, 0, 0.05) 100%);
+        }
+
+        [data-theme="light"] .hero-overlay {
+            background: linear-gradient(135deg, rgba(250, 248, 245, 0.3) 0%, transparent 60%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 77, 0, 0.15);
+            border: 1px solid rgba(255, 77, 0, 0.3);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 28px;
+            animation: fadeSlideUp 0.6s ease both;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: blink 1.5s ease infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.3
+            }
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(72px, 10vw, 140px);
+            line-height: 0.92;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 8px;
+            animation: fadeSlideUp 0.6s 0.1s ease both;
+        }
+
+        [data-theme="light"] .hero-title {
+            color: #fff;
+        }
+
+        .hero-title .accent {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 68px);
+            color: var(--text2);
+            margin-bottom: 28px;
+            letter-spacing: 1px;
+            animation: fadeSlideUp 0.6s 0.2s ease both;
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 480px;
+            margin-bottom: 40px;
+            animation: fadeSlideUp 0.6s 0.3s ease both;
+            line-height: 1.7;
+        }
+
+        [data-theme="light"] .hero-desc {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            animation: fadeSlideUp 0.6s 0.4s ease both;
+        }
+
+        .hero-stats {
+            position: absolute;
+            right: 5%;
+            bottom: 80px;
+            display: flex;
+            gap: 2px;
+            animation: fadeSlideUp 0.6s 0.5s ease both;
+            z-index: 2;
+        }
+
+        .stat-card {
+            background: rgba(30, 30, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            text-align: center;
+            min-width: 130px;
+        }
+
+        [data-theme="light"] .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .stat-num {
+            font-family: var(--font-display);
+            font-size: 48px;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text2);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 2;
+            animation: fadeSlideUp 0.6s 0.6s ease both;
+        }
+
+        .scroll-text {
+            font-size: 11px;
+            color: var(--text3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollAnim 1.5s ease infinite;
+        }
+
+        @keyframes scrollAnim {
+
+            0%,
+            100% {
+                transform: scaleY(1);
+                opacity: 1
+            }
+
+            50% {
+                transform: scaleY(0.5);
+                opacity: 0.5
+            }
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* ── BOOKING STRIP ── */
+        #booking {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 32px 5%;
+        }
+
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 12px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: end;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field-label {
+            font-size: 11px;
+            color: var(--text3);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .field-input {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 15px;
+            width: 100%;
+            transition: border 0.2s;
+            outline: none;
+        }
+
+        .field-input:focus {
+            border-color: var(--accent);
+        }
+
+        .field-input::placeholder {
+            color: var(--text3);
+        }
+
+        [data-theme="light"] .field-input {
+            background: var(--bg2);
+        }
+
+        /* ── SECTION COMMONS ── */
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-tag::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: clamp(32px, 4vw, 52px);
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .section-desc {
+            font-size: 17px;
+            color: var(--text2);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        .section-head {
+            margin-bottom: 60px;
+        }
+
+        /* ── FLEET ── */
+        #fleet {
+            background: var(--bg2);
+        }
+
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .fleet-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .fleet-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--card-shadow), var(--glow);
+            border-color: rgba(255, 77, 0, 0.3);
+        }
+
+        .fleet-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .fleet-card:hover .fleet-img {
+            transform: scale(1.04);
+        }
+
+        .fleet-img-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .fleet-badge-wrap {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-hot {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .badge-new {
+            background: var(--accent2);
+            color: #000;
+        }
+
+        .badge-lux {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        .fleet-body {
+            padding: 24px;
+        }
+
+        .fleet-name {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .fleet-type {
+            font-size: 13px;
+            color: var(--text3);
+            margin-bottom: 16px;
+        }
+
+        .fleet-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: var(--bg3);
+            border-radius: var(--radius-sm);
+        }
+
+        [data-theme="light"] .fleet-specs {
+            background: var(--bg2);
+        }
+
+        .spec-item {
+            text-align: center;
+        }
+
+        .spec-val {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--accent);
+            font-family: var(--font-head);
+        }
+
+        .spec-key {
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 2px;
+        }
+
+        .fleet-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .feature-pill {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 100px;
+            background: rgba(255, 77, 0, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(255, 77, 0, 0.2);
+        }
+
+        .fleet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .price-tag {
+            font-family: var(--font-head);
+        }
+
+        .price-from {
+            font-size: 11px;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-num {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .price-unit {
+            font-size: 13px;
+            color: var(--text2);
+        }
+
+        /* ── ROUTES ── */
+        #routes {
+            background: var(--bg);
+        }
+
+        .routes-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .route-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .route-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-radius: var(--radius-sm);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.25s;
+            position: relative;
+        }
+
+        .route-item:hover,
+        .route-item.active {
+            background: var(--surface);
+            border-color: var(--border);
+        }
+
+        .route-item.active {
+            border-color: rgba(255, 77, 0, 0.3);
+        }
+
+        .route-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent);
+            border-radius: 3px 0 0 3px;
+        }
+
+        .route-cities {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .route-from {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .route-arrow {
+            color: var(--accent);
+            font-size: 18px;
+        }
+
+        .route-to {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .route-meta {
+            text-align: right;
+        }
+
+        .route-dur {
+            font-size: 14px;
+            color: var(--text2);
+        }
+
+        .route-price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 16px;
+        }
+
+        .route-map {
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            height: 420px;
+            position: relative;
+        }
+
+        .route-map-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.4) contrast(1.1);
+            transition: filter 0.3s;
+        }
+
+        [data-theme="light"] .route-map-img {
+            filter: saturate(0.7);
+        }
+
+        .map-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 60%, var(--surface));
+            pointer-events: none;
+        }
+
+        .map-label {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--text);
+        }
+
+        .map-tag {
+            font-size: 13px;
+            color: var(--text2);
+            font-weight: 400;
+            font-family: var(--font-body);
+            margin-top: 4px;
+        }
+
+        /* ── WHY US ── */
+        #why {
+            background: var(--bg2);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .why-card {
+            padding: 32px;
+            border-radius: var(--radius);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: left;
+        }
+
+        .why-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 77, 0, 0.2);
+        }
+
+        .why-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .why-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(255, 77, 0, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .why-title {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .why-desc {
+            font-size: 15px;
+            color: var(--text2);
+            line-height: 1.7;
+        }
+
+        /* ── EXPERIENCE ── */
+        #experience {
+            background: var(--bg);
+        }
+
+        .exp-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .exp-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 12px;
+        }
+
+        .exp-img {
+            border-radius: var(--radius);
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+            overflow: hidden;
+        }
+
+        .exp-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .exp-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .exp-img:first-child {
+            grid-row: span 2;
+            height: 420px;
+        }
+
+        .exp-img:not(:first-child) {
+            height: 200px;
+        }
+
+        .exp-content {}
+
+        .exp-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 36px;
+        }
+
+        .exp-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .exp-item:last-child {
+            border-bottom: none;
+        }
+
+        .exp-num {
+            font-family: var(--font-display);
+            font-size: 36px;
+            color: var(--accent);
+            line-height: 1;
+            min-width: 40px;
+        }
+
+        .exp-item-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .exp-item-desc {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+
+        /* ── TESTIMONIALS ── */
+        #testimonials {
+            background: var(--bg2);
+            overflow: hidden;
+        }
+
+        .testimonials-track {
+            display: flex;
+            gap: 24px;
+            animation: scrollTrack 40s linear infinite;
+            width: max-content;
+        }
+
+        .testimonials-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollTrack {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .testi-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            min-width: 360px;
+            max-width: 360px;
+            flex-shrink: 0;
+        }
+
+        .testi-stars {
+            color: var(--accent2);
+            font-size: 18px;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+
+        .testi-text {
+            font-size: 15px;
+            color: var(--text2);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testi-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testi-name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .testi-loc {
+            font-size: 13px;
+            color: var(--text3);
+        }
+
+        /* ── OFFERS ── */
+        #offers {
+            background: var(--bg);
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .offer-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .offer-card:hover {
+            transform: scale(1.02);
+        }
+
+        .offer-card img {
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+            object-fit: cover;
+            filter: brightness(0.55);
+            transition: filter 0.3s, transform 0.4s;
+        }
+
+        .offer-card:hover img {
+            filter: brightness(0.45);
+            transform: scale(1.04);
+        }
+
+        .offer-content {
+            position: absolute;
+            inset: 0;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+        }
+
+        .offer-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .offer-title {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .offer-sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+        }
+
+        .offer-price {
+            display: inline-block;
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--accent2);
+        }
+
+        .offer-price sup {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ── FAQ ── */
+        #faq {
+            background: var(--bg2);
+        }
+
+        .faq-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .faq-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .faq-item.open {
+            border-color: rgba(255, 77, 0, 0.3);
+        }
+
+        .faq-q {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.2s;
+            user-select: none;
+        }
+
+        .faq-item.open .faq-q {
+            color: var(--accent);
+        }
+
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: var(--text2);
+            transition: transform 0.3s, background 0.3s;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s;
+            font-size: 15px;
+            color: var(--text2);
+            line-height: 1.8;
+            padding: 0 24px;
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 200px;
+            padding: 0 24px 20px;
+        }
+
+        /* ── CONTACT ── */
+        #contact {
+            background: var(--bg);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 77, 0, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-item-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .contact-item-val {
+            color: var(--text2);
+            font-size: 15px;
+        }
+
+        .contact-form {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-full {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text2);
+        }
+
+        textarea.field-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            padding-top: 8px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 60px 5% 32px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand p {
+            color: var(--text2);
+            font-size: 15px;
+            margin-top: 16px;
+            max-width: 280px;
+            line-height: 1.7;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: var(--text2);
+        }
+
+        .social-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .footer-col-title {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text2);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copy {
+            color: var(--text3);
+            font-size: 14px;
+        }
+
+        .footer-links-bottom {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links-bottom a {
+            color: var(--text3);
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links-bottom a:hover {
+            color: var(--text2);
+        }
+
+        /* ── COUNTER ANIMATION ── */
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .count-animated {
+            animation: countUp 0.6s ease both;
+        }
+
+        /* ── MOBILE HAMBURGER ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            transition: all 0.3s;
+            border-radius: 1px;
+        }
+
+        /* ── BACK TO TOP ── */
+        #back-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: all 0.3s;
+            z-index: 900;
+            box-shadow: 0 4px 16px rgba(255, 77, 0, 0.4);
+        }
+
+        #back-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #back-top:hover {
+            background: #ff6520;
+            transform: translateY(-2px);
+        }
+
+        /* ── MEDIA QUERIES ── */
+        @media (max-width: 1024px) {
+            .booking-form {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .routes-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .exp-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-stats {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                margin-top: 40px;
+                flex-wrap: wrap;
+            }
+
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-full {
+                grid-column: span 1;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+        }
+
+        /* ── MARQUEE TOP ── */
+        .marquee-bar {
+            background: var(--accent);
+            overflow: hidden;
+            padding: 8px 0;
+            margin-top: 72px;
+        }
+
+        .marquee-inner {
+            display: flex;
+            gap: 60px;
+            width: max-content;
+            animation: marqueeScroll 20s linear infinite;
+        }
+
+        .marquee-inner span {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        @keyframes marqueeScroll {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+
+        .marquee-dot {
+            opacity: 0.5;
+        }
+
+        /* REVEAL animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <div class="logo-bolt"></div>
+            <span class="logo-text">FLASH <span>TOURS</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#fleet">Fleet</a></li>
+            <li><a href="#routes">Routes</a></li>
+            <li><a href="#offers">Offers</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle" title="Toggle theme"
+                aria-label="Toggle dark/light mode"></button>
+            <a href="#booking" class="btn btn-primary">Book Now →</a>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MARQUEE -->
+    <div class="marquee-bar">
+        <div class="marquee-inner">
+            <span>⚡ Comfort Rides</span><span class="marquee-dot">•</span>
+            <span>🚌 AC Luxury Buses</span><span class="marquee-dot">•</span>
+            <span>🛣️ 500+ Routes Across India</span><span class="marquee-dot">•</span>
+            <span>⚡ On-Time Guarantee</span><span class="marquee-dot">•</span>
+            <span>🎫 Easy Online Booking</span><span class="marquee-dot">•</span>
+            <span>💺 Recliner Seats</span><span class="marquee-dot">•</span>
+            <span>⚡ Comfort Rides</span><span class="marquee-dot">•</span>
+            <span>🚌 AC Luxury Buses</span><span class="marquee-dot">•</span>
+            <span>🛣️ 500+ Routes Across India</span><span class="marquee-dot">•</span>
+            <span>⚡ On-Time Guarantee</span><span class="marquee-dot">•</span>
+            <span>🎫 Easy Online Booking</span><span class="marquee-dot">•</span>
+            <span>💺 Recliner Seats</span><span class="marquee-dot">•</span>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <div class="badge-dot"></div> India's Fastest Bus Network
+            </div>
+            <h1 class="hero-title">FLASH<br><span class="accent">TOURS</span></h1>
+            <p class="hero-subtitle">& TRAVEL</p>
+            <p class="hero-desc">Premium bus journeys reimagined — luxury fleets, punctual arrivals, and memorable
+                travel experiences across every corner of India.</p>
+            <div class="hero-actions">
+                <a href="#booking" class="btn btn-primary" style="font-size:16px;padding:14px 28px;">Book Your Seat
+                    →</a>
+                <a href="#fleet" class="btn btn-outline" style="font-size:16px;padding:14px 28px;">View Fleet</a>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-card">
+                <div class="stat-num" data-count="500">0</div>
+                <div class="stat-label">Routes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-count="2">0</div>
+                <div class="stat-label" style="white-space:nowrap">Mn+ Travellers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" data-count="98">0</div>
+                <div class="stat-label">% On-Time</div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-text">Scroll</div>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section id="booking" style="padding:40px 5%">
+        <div class="booking-form reveal">
+            <div class="field-group">
+                <label class="field-label">From</label>
+                <input class="field-input" type="text" placeholder="Departure city…" />
+            </div>
+            <div class="field-group">
+                <label class="field-label">To</label>
+                <input class="field-input" type="text" placeholder="Destination city…" />
+            </div>
+            <div class="field-group">
+                <label class="field-label">Date</label>
+                <input class="field-input" type="date" />
+            </div>
+            <div class="field-group">
+                <label class="field-label">Passengers</label>
+                <select class="field-input">
+                    <option>1 Passenger</option>
+                    <option>2 Passengers</option>
+                    <option>3 Passengers</option>
+                    <option>4+ Passengers</option>
+                </select>
+            </div>
+            <button class="btn btn-primary"
+                style="padding:12px 28px;font-size:15px;height:50px;align-self:flex-end">Search Buses</button>
+        </div>
+    </section>
+
+    <!-- FLEET -->
+    <section id="fleet">
+        <div class="section-head reveal">
+            <div class="section-tag">Our Fleet</div>
+            <h2 class="section-title">Buses Built for Comfort</h2>
+            <p class="section-desc">Every vehicle in our fleet is meticulously maintained and designed to make your
+                journey as enjoyable as the destination.</p>
+        </div>
+        <div class="fleet-grid">
+
+            <div class="fleet-card reveal">
+                <div class="fleet-img-wrap">
+                    <img class="fleet-img"
+                        src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=800&auto=format&fit=crop&q=80"
+                        alt="Luxury Sleeper Coach" loading="lazy">
+                    <div class="fleet-badge-wrap"><span class="badge badge-hot">Most Popular</span></div>
+                </div>
+                <div class="fleet-body">
+                    <div class="fleet-name">Luxury Sleeper Coach</div>
+                    <div class="fleet-type">Long-haul overnight travel</div>
+                    <div class="fleet-specs">
+                        <div class="spec-item">
+                            <div class="spec-val">36</div>
+                            <div class="spec-key">Seats</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-val">2+1</div>
+                            <div class="spec-key">Layout</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-val">180°</div>
+                            <div class="spec-key">Recline</div>
+                        </div>
+                    </div>
+                    <div class="fleet-features">
+                        <span class="feature-pill">Full AC</span>
+                        <span class="feature-pill">USB Charging</span>
+                        <span class="feature-pill">Wi-Fi</span>
+                        <span class="feature-pill">Blanket</span>
+                        <span class="feature-pill">Reading Light</span>
+                    </div>
+                    <div class="fleet-footer">
+                        <div class="price-tag">
+                            <div class="price-from">from</div>
+                            <div><span class="price-num">₹799</span><span class="price-unit"> /seat</span></div>
+                        </div>
+                        <a href="#booking" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fleet-card reveal">
+                <div class="fleet-img-wrap">
+                    <img class="fleet-img"
+                        src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=800&auto=format&fit=crop&q=80"
+                        alt="Volvo AC Semi-Sleeper" loading="lazy">
+                    <div class="fleet-badge-wrap"><span class="badge badge-new">New Fleet</span></div>
+                </div>
+                <div class="fleet-body">
+                    <div class="fleet-name">Volvo AC Semi-Sleeper</div>
+                    <div class="fleet-type">Day & night intercity travel</div>
+                    <div class="fleet-specs">
+                        <div class="spec-item">
+                            <div class="spec-val">40</div>
+                            <div class="spec-key">Seats</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-val">2+2</div>
+                            <div class="spec-key">Layout</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-val">135°</div>
+                            <div class="spec-key">Recline</div>
+                        </div>
+                    </div>
+                    <div class="fleet-features">
+                        <span class="feature-pill">Full AC</span>
+                        <span class="feature-pill">USB Charging</span>
+                        <span class="feature-pill">Panoramic Windows</span>
+                        <span class="feature-pill">Snack Onboard</span>
+                    </div>
+                    <div class="fleet-footer">
+                        <div class="price-tag">
+                            <div class="price-from">from</div>
+                            <div><span class="price-num">₹549</span><span class="price-unit"> /seat</span></div>
+                        </div>
+                        <a href="#booking" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fleet-card reveal">
+                <div class="fleet-img-wrap">
+                    <img class="fleet-img"
+                        src="https://images.unsplash.com/photo-1553531384-cc64ac80f931?w=800&auto=format&fit=crop&q=80"
+                        alt="Express Seater" loading="lazy">
+                    <div class="fleet-badge-wrap"><span class="badge badge-lux">Budget Pick</span></div>
+                </div>
+                <div class="fleet-body">
+                    <div class="fleet-name">Express Seater</div>
+                    <div class="fleet-type">Short to medium haul routes</div>
+                    <div class="fleet-specs">
+                        <div class="spec-item">
+                            <div class="spec-val">50</div>
+                            <div class="spec-key">Seats</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-val">2+2</div>
+                            <div class="spec-key">Layout</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-val">90°</div>
+                            <div class="spec-key">Recline</div>
+                        </div>
+                    </div>
+                    <div class="fleet-features">
+                        <span class="feature-pill">AC</span>
+                        <span class="feature-pill">USB Charging</span>
+                        <span class="feature-pill">Ample Legroom</span>
+                    </div>
+                    <div class="fleet-footer">
+                        <div class="price-tag">
+                            <div class="price-from">from</div>
+                            <div><span class="price-num">₹299</span><span class="price-unit"> /seat</span></div>
+                        </div>
+                        <a href="#booking" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ROUTES -->
+    <section id="routes">
+        <div class="routes-wrapper">
+            <div>
+                <div class="section-head reveal">
+                    <div class="section-tag">Routes</div>
+                    <h2 class="section-title">Popular Destinations</h2>
+                    <p class="section-desc">Connecting India's most loved cities with comfort and speed.</p>
+                </div>
+                <div class="route-list reveal" id="routeList">
+                    <div class="route-item active" data-route="Ahmedabad → Mumbai">
+                        <div class="route-cities"><span class="route-from">Ahmedabad</span><span
+                                class="route-arrow">→</span><span class="route-to">Mumbai</span></div>
+                        <div class="route-meta">
+                            <div class="route-dur">7h 30m • 530 km</div>
+                            <div class="route-price">From ₹549</div>
+                        </div>
+                    </div>
+                    <div class="route-item" data-route="Ahmedabad → Surat">
+                        <div class="route-cities"><span class="route-from">Ahmedabad</span><span
+                                class="route-arrow">→</span><span class="route-to">Surat</span></div>
+                        <div class="route-meta">
+                            <div class="route-dur">3h • 265 km</div>
+                            <div class="route-price">From ₹299</div>
+                        </div>
+                    </div>
+                    <div class="route-item" data-route="Mumbai → Pune">
+                        <div class="route-cities"><span class="route-from">Mumbai</span><span
+                                class="route-arrow">→</span><span class="route-to">Pune</span></div>
+                        <div class="route-meta">
+                            <div class="route-dur">3h 30m • 150 km</div>
+                            <div class="route-price">From ₹349</div>
+                        </div>
+                    </div>
+                    <div class="route-item" data-route="Delhi → Jaipur">
+                        <div class="route-cities"><span class="route-from">Delhi</span><span
+                                class="route-arrow">→</span><span class="route-to">Jaipur</span></div>
+                        <div class="route-meta">
+                            <div class="route-dur">5h • 280 km</div>
+                            <div class="route-price">From ₹449</div>
+                        </div>
+                    </div>
+                    <div class="route-item" data-route="Bangalore → Mysore">
+                        <div class="route-cities"><span class="route-from">Bangalore</span><span
+                                class="route-arrow">→</span><span class="route-to">Mysore</span></div>
+                        <div class="route-meta">
+                            <div class="route-dur">3h • 145 km</div>
+                            <div class="route-price">From ₹299</div>
+                        </div>
+                    </div>
+                    <div class="route-item" data-route="Chennai → Coimbatore">
+                        <div class="route-cities"><span class="route-from">Chennai</span><span
+                                class="route-arrow">→</span><span class="route-to">Coimbatore</span></div>
+                        <div class="route-meta">
+                            <div class="route-dur">8h • 500 km</div>
+                            <div class="route-price">From ₹599</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="route-map reveal">
+                <img class="route-map-img"
+                    src="https://images.unsplash.com/photo-1519817650390-64a93db51149?w=800&auto=format&fit=crop&q=80"
+                    alt="Route Map" id="routeMapImg">
+                <div class="map-overlay"></div>
+                <div class="map-label" id="routeLabel">Ahmedabad → Mumbai<div class="map-tag">530 km · Luxury Sleeper
+                        Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section id="why">
+        <div class="section-head reveal" style="text-align:center;max-width:600px;margin:0 auto 60px">
+            <div class="section-tag" style="justify-content:center">Why Flash Tours</div>
+            <h2 class="section-title">Travel the Smart Way</h2>
+            <p class="section-desc" style="margin:0 auto">We don't just move people. We deliver experiences that make
+                every kilometre worth it.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card reveal">
+                <div class="why-icon">⚡</div>
+                <div class="why-title">Lightning Fast Booking</div>
+                <p class="why-desc">Book your seat in under 60 seconds. Pick your bus, choose your seat, and get instant
+                    confirmation on your phone.</p>
+            </div>
+            <div class="why-card reveal">
+                <div class="why-icon">🛡️</div>
+                <div class="why-title">Safe & Reliable</div>
+                <p class="why-desc">All buses are GPS-tracked in real time. Our drivers are trained professionals with
+                    spotless safety records.</p>
+            </div>
+            <div class="why-card reveal">
+                <div class="why-icon">❄️</div>
+                <div class="why-title">Premium AC Comfort</div>
+                <p class="why-desc">Climate-controlled interiors, ergonomic seats, ample legroom — travel that feels
+                    like business class on wheels.</p>
+            </div>
+            <div class="why-card reveal">
+                <div class="why-icon">📍</div>
+                <div class="why-title">Live Bus Tracking</div>
+                <p class="why-desc">Track your bus in real time. Know exactly when to arrive at the boarding point — no
+                    more waiting in the dark.</p>
+            </div>
+            <div class="why-card reveal">
+                <div class="why-icon">💸</div>
+                <div class="why-title">Best Price Guarantee</div>
+                <p class="why-desc">Find a cheaper ticket elsewhere? We'll match it and add a bonus discount. Your
+                    budget is our priority.</p>
+            </div>
+            <div class="why-card reveal">
+                <div class="why-icon">🔄</div>
+                <div class="why-title">Free Cancellation</div>
+                <p class="why-desc">Plans change. Cancel up to 4 hours before departure and get a full refund — no
+                    questions asked.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+        <div class="exp-wrapper">
+            <div class="exp-gallery reveal">
+                <div class="exp-img" style="grid-row:span 2;height:420px;overflow:hidden;border-radius:16px">
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&auto=format&fit=crop&q=80"
+                        alt="Bus interior" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s">
+                </div>
+                <div class="exp-img" style="height:200px;overflow:hidden;border-radius:16px">
+                    <img src="https://images.unsplash.com/photo-1570125909517-53cb21c89ff2?w=400&auto=format&fit=crop&q=80"
+                        alt="Bus exterior" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s">
+                </div>
+                <div class="exp-img" style="height:200px;overflow:hidden;border-radius:16px">
+                    <img src="https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?w=400&auto=format&fit=crop&q=80"
+                        alt="Travel scenic" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s">
+                </div>
+            </div>
+            <div class="exp-content reveal">
+                <div class="section-tag">The Experience</div>
+                <h2 class="section-title">Every Journey, Unforgettable</h2>
+                <p class="section-desc">From the moment you book to the final drop-off — Flash Tours is designed to
+                    exceed expectations at every touchpoint.</p>
+                <ul class="exp-list">
+                    <li class="exp-item">
+                        <div class="exp-num">01</div>
+                        <div>
+                            <div class="exp-item-title">Seat Selection You'll Love</div>
+                            <div class="exp-item-desc">Choose your exact seat from an interactive seat map. Window seat
+                                lover? Done. Front row fan? Sorted.</div>
+                        </div>
+                    </li>
+                    <li class="exp-item">
+                        <div class="exp-num">02</div>
+                        <div>
+                            <div class="exp-item-title">Boarded Refreshments</div>
+                            <div class="exp-item-desc">Select routes include complimentary water and snack packs. Long
+                                journeys also feature scheduled meal stops.</div>
+                        </div>
+                    </li>
+                    <li class="exp-item">
+                        <div class="exp-num">03</div>
+                        <div>
+                            <div class="exp-item-title">Entertainment On Board</div>
+                            <div class="exp-item-desc">Wi-Fi enabled sleeper coaches and curated playlists for premium
+                                routes make the ride fly by.</div>
+                        </div>
+                    </li>
+                    <li class="exp-item">
+                        <div class="exp-num">04</div>
+                        <div>
+                            <div class="exp-item-title">Door-Step Drop</div>
+                            <div class="exp-item-desc">Multiple boarding and drop-off points within each city ensure you
+                                never travel far to reach your bus.</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" style="padding:80px 0;overflow:hidden">
+        <div class="section-head reveal" style="text-align:center;padding:0 5%;max-width:600px;margin:0 auto 50px">
+            <div class="section-tag" style="justify-content:center">Traveller Stories</div>
+            <h2 class="section-title">What Our Passengers Say</h2>
+        </div>
+        <div style="overflow:hidden">
+            <div class="testimonials-track" id="testiTrack">
+                <!-- Duplicated for infinite loop -->
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"Took the overnight Ahmedabad–Mumbai sleeper. Smoothest bus ride I've ever
+                        had. The seat was massive and I slept like a baby the entire journey!"</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=11"
+                            alt="Priya S">
+                        <div>
+                            <div class="testi-name">Priya Sharma</div>
+                            <div class="testi-loc">Ahmedabad, Gujarat</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"Flash Tours' app is brilliant. Booked within a minute, picked my window seat,
+                        and the bus was on time to the dot. Will never go back to trains for this route."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=32"
+                            alt="Arjun K">
+                        <div>
+                            <div class="testi-name">Arjun Kapoor</div>
+                            <div class="testi-loc">Mumbai, Maharashtra</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"The Delhi–Jaipur service is impeccable. On-time pickup, clean AC bus,
+                        friendly co-passengers. The journey felt more like a luxury experience than a commute."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=45"
+                            alt="Meena R">
+                        <div>
+                            <div class="testi-name">Meena Rawat</div>
+                            <div class="testi-loc">Delhi, NCR</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★☆</div>
+                    <p class="testi-text">"Traveled Bangalore–Mysore with my family. Kids loved the ride — spacious
+                        seats, good AC, and they even gave us snacks! Best family travel option."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=58"
+                            alt="Suresh V">
+                        <div>
+                            <div class="testi-name">Suresh Venkat</div>
+                            <div class="testi-loc">Bangalore, Karnataka</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"I had to cancel my ticket last minute. Flash Tours refunded me without any
+                        hassle. That kind of trust is rare. Definitely booking again next month."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=22"
+                            alt="Nisha J">
+                        <div>
+                            <div class="testi-name">Nisha Joshi</div>
+                            <div class="testi-loc">Jaipur, Rajasthan</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"The live tracking feature is a game changer. My parents could see exactly
+                        where the bus was. Made the whole journey stress-free for the entire family."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=69"
+                            alt="Rahul M">
+                        <div>
+                            <div class="testi-name">Rahul Mehta</div>
+                            <div class="testi-loc">Surat, Gujarat</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicate set for seamless loop -->
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"Took the overnight Ahmedabad–Mumbai sleeper. Smoothest bus ride I've ever
+                        had. The seat was massive and I slept like a baby the entire journey!"</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=11"
+                            alt="Priya S">
+                        <div>
+                            <div class="testi-name">Priya Sharma</div>
+                            <div class="testi-loc">Ahmedabad, Gujarat</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"Flash Tours' app is brilliant. Booked within a minute, picked my window seat,
+                        and the bus was on time to the dot. Will never go back to trains for this route."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=32"
+                            alt="Arjun K">
+                        <div>
+                            <div class="testi-name">Arjun Kapoor</div>
+                            <div class="testi-loc">Mumbai, Maharashtra</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"The Delhi–Jaipur service is impeccable. On-time pickup, clean AC bus,
+                        friendly co-passengers. The journey felt more like a luxury experience than a commute."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=45"
+                            alt="Meena R">
+                        <div>
+                            <div class="testi-name">Meena Rawat</div>
+                            <div class="testi-loc">Delhi, NCR</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★☆</div>
+                    <p class="testi-text">"Traveled Bangalore–Mysore with my family. Kids loved the ride — spacious
+                        seats, good AC, and they even gave us snacks! Best family travel option."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=58"
+                            alt="Suresh V">
+                        <div>
+                            <div class="testi-name">Suresh Venkat</div>
+                            <div class="testi-loc">Bangalore, Karnataka</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"I had to cancel my ticket last minute. Flash Tours refunded me without any
+                        hassle. That kind of trust is rare. Definitely booking again next month."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=22"
+                            alt="Nisha J">
+                        <div>
+                            <div class="testi-name">Nisha Joshi</div>
+                            <div class="testi-loc">Jaipur, Rajasthan</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"The live tracking feature is a game changer. My parents could see exactly
+                        where the bus was. Made the whole journey stress-free for the entire family."</p>
+                    <div class="testi-author"><img class="testi-avatar" src="https://i.pravatar.cc/80?img=69"
+                            alt="Rahul M">
+                        <div>
+                            <div class="testi-name">Rahul Mehta</div>
+                            <div class="testi-loc">Surat, Gujarat</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OFFERS -->
+    <section id="offers">
+        <div class="section-head reveal">
+            <div class="section-tag">Special Offers</div>
+            <h2 class="section-title">Hot Deals This Season</h2>
+            <p class="section-desc">Limited-time fares on our most popular routes. Book fast before seats fill up.</p>
+        </div>
+        <div class="offers-grid">
+            <div class="offer-card reveal">
+                <img src="https://images.unsplash.com/photo-1596386461350-326ccb383e9f?w=800&auto=format&fit=crop&q=80"
+                    alt="Monsoon Special" loading="lazy">
+                <div class="offer-content">
+                    <div class="offer-tag">⚡ Flash Sale — 40% Off</div>
+                    <div class="offer-title">Monsoon Mountain Escape</div>
+                    <div class="offer-sub">Ahmedabad → Manali · Overnight Sleeper</div>
+                    <div class="offer-price"><sup>₹</sup>1,199</div>
+                </div>
+            </div>
+            <div class="offer-card reveal">
+                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&auto=format&fit=crop&q=80"
+                    alt="Weekend Getaway" loading="lazy">
+                <div class="offer-content">
+                    <div class="offer-tag">🎫 Weekend Deal</div>
+                    <div class="offer-title">Coastal Weekend</div>
+                    <div class="offer-sub">Mumbai → Goa · Fri nights</div>
+                    <div class="offer-price"><sup>₹</sup>899</div>
+                </div>
+            </div>
+            <div class="offer-card reveal">
+                <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=400&auto=format&fit=crop&q=80"
+                    alt="City Hop" loading="lazy">
+                <div class="offer-content">
+                    <div class="offer-tag">🚌 City Hop Pass</div>
+                    <div class="offer-title">Gujarat Circuit</div>
+                    <div class="offer-sub">Ahmedabad · Vadodara · Surat</div>
+                    <div class="offer-price"><sup>₹</sup>599</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="section-head reveal" style="text-align:center;max-width:600px;margin:0 auto 50px">
+            <div class="section-tag" style="justify-content:center">FAQ</div>
+            <h2 class="section-title">Common Questions</h2>
+        </div>
+        <div class="faq-wrapper">
+            <div class="faq-item reveal open">
+                <div class="faq-q">How early should I arrive at the boarding point?<span class="faq-icon">+</span></div>
+                <div class="faq-a">We recommend arriving at least 15 minutes before departure. Your e-ticket QR code is
+                    your boarding pass — no need to print anything.</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Can I cancel or reschedule my booking?<span class="faq-icon">+</span></div>
+                <div class="faq-a">Yes! Cancellations made more than 4 hours before departure receive a full refund.
+                    Rescheduling is available up to 2 hours before departure, subject to seat availability.</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Is luggage allowed on board?<span class="faq-icon">+</span></div>
+                <div class="faq-a">Each passenger is allowed one cabin bag (up to 7 kg) and one check-in bag (up to 20
+                    kg) in the luggage hold. Extra luggage can be added for a small fee during booking.</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Are there stops for food and restrooms on long journeys?<span
+                        class="faq-icon">+</span></div>
+                <div class="faq-a">All journeys over 4 hours include scheduled halts at clean, well-equipped rest stops.
+                    For overnight routes, there's typically one meal halt at a highway dhaba.</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">How do I track my bus?<span class="faq-icon">+</span></div>
+                <div class="faq-a">Once your journey is confirmed, you'll receive a tracking link via SMS and email. You
+                    can also track your bus live from within the Flash Tours app available on iOS and Android.</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Do you offer group booking discounts?<span class="faq-icon">+</span></div>
+                <div class="faq-a">Absolutely! Groups of 10 or more get up to 20% off. For charter enquiries or
+                    corporate travel programs, contact our team at groups@flashtours.in.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-wrapper">
+            <div>
+                <div class="section-tag reveal">Contact Us</div>
+                <h2 class="section-title reveal">Let's Plan Your Journey</h2>
+                <p class="section-desc reveal" style="margin-bottom:40px">Questions, group bookings, corporate travel,
+                    or feedback — our team is always ready to help.</p>
+                <div class="contact-info">
+                    <div class="contact-item reveal">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <div class="contact-item-title">Phone</div>
+                            <div class="contact-item-val">+91 98765 43210</div>
+                            <div class="contact-item-val">+91 79000 11111</div>
+                        </div>
+                    </div>
+                    <div class="contact-item reveal">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <div class="contact-item-title">Email</div>
+                            <div class="contact-item-val">hello@flashtours.in</div>
+                            <div class="contact-item-val">support@flashtours.in</div>
+                        </div>
+                    </div>
+                    <div class="contact-item reveal">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <div class="contact-item-title">Head Office</div>
+                            <div class="contact-item-val">Plot 42, Iscon Circle, SG Highway<br>Ahmedabad, Gujarat 380054
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-item reveal">
+                        <div class="contact-icon">🕐</div>
+                        <div>
+                            <div class="contact-item-title">Support Hours</div>
+                            <div class="contact-item-val">24/7 — 365 days a year</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form reveal">
+                <h3
+                    style="font-family:var(--font-head);font-size:22px;font-weight:700;margin-bottom:24px;letter-spacing:-0.5px">
+                    Send us a message</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label class="form-label">First Name</label><input class="field-input"
+                            type="text" placeholder="Rahul"></div>
+                    <div class="form-group"><label class="form-label">Last Name</label><input class="field-input"
+                            type="text" placeholder="Mehta"></div>
+                    <div class="form-group form-full"><label class="form-label">Email</label><input class="field-input"
+                            type="email" placeholder="rahul@example.com"></div>
+                    <div class="form-group form-full"><label class="form-label">Subject</label><input
+                            class="field-input" type="text" placeholder="Group booking enquiry…"></div>
+                    <div class="form-group form-full"><label class="form-label">Message</label><textarea
+                            class="field-input" placeholder="Tell us about your travel needs…"></textarea></div>
+                    <div class="form-submit form-full"><button class="btn btn-primary"
+                            style="width:100%;padding:14px;font-size:16px;justify-content:center"
+                            onclick="showThanks(this)">Send Message →</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo" style="display:inline-flex;margin-bottom:4px">
+                    <div class="logo-bolt"></div>
+                    <span class="logo-text" style="font-size:22px">FLASH <span>TOURS</span></span>
+                </a>
+                <p>India's most trusted bus travel brand — combining speed, safety, and comfort since 2008. 500+ routes.
+                    2 million happy travellers.</p>
+                <div class="footer-social">
+                    <a class="social-btn" href="#" title="Facebook">f</a>
+                    <a class="social-btn" href="#" title="Instagram" style="font-style:italic">in</a>
+                    <a class="social-btn" href="#" title="Twitter">𝕏</a>
+                    <a class="social-btn" href="#" title="YouTube">▶</a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="#fleet">Our Fleet</a></li>
+                    <li><a href="#routes">Popular Routes</a></li>
+                    <li><a href="#offers">Special Offers</a></li>
+                    <li><a href="#experience">Travel Experience</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Travel Info</div>
+                <ul class="footer-links">
+                    <li><a href="#">Boarding Points</a></li>
+                    <li><a href="#">Luggage Policy</a></li>
+                    <li><a href="#">Cancellation Policy</a></li>
+                    <li><a href="#">Group Bookings</a></li>
+                    <li><a href="#">Corporate Travel</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Support</div>
+                <ul class="footer-links">
+                    <li><a href="#">Help Centre</a></li>
+                    <li><a href="#">Track My Bus</a></li>
+                    <li><a href="#">Manage Booking</a></li>
+                    <li><a href="#">Download App</a></li>
+                    <li><a href="#">Franchise</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2025 Flash Tours & Travel Pvt. Ltd. All rights reserved.</div>
+            <div class="footer-links-bottom">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+    <script>
+        // Theme Toggle
+        const root = document.documentElement;
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        });
+
+        // Counter Animation
+        function animateCounters() {
+            document.querySelectorAll('[data-count]').forEach(el => {
+                const target = +el.dataset.count;
+                let current = 0;
+                const step = target / 60;
+                const timer = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    el.textContent = Math.round(current);
+                    if (current >= target) clearInterval(timer);
+                }, 16);
+            });
+        }
+        setTimeout(animateCounters, 800);
+
+        // Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(r => observer.observe(r));
+
+        // Back to Top
+        const backTop = document.getElementById('back-top');
+        window.addEventListener('scroll', () => {
+            backTop.classList.toggle('visible', window.scrollY > 500);
+        });
+
+        // Route interactivity
+        const routeItems = document.querySelectorAll('.route-item');
+        const routeLabel = document.getElementById('routeLabel');
+        routeItems.forEach(item => {
+            item.addEventListener('click', () => {
+                routeItems.forEach(r => r.classList.remove('active'));
+                item.classList.add('active');
+                routeLabel.textContent = item.dataset.route;
+                routeLabel.insertAdjacentHTML('beforeend', '<div class="map-tag">Tap to book this route</div>');
+            });
+        });
+
+        // FAQ toggle
+        document.querySelectorAll('.faq-q').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+
+        // Form submit feedback
+        function showThanks(btn) {
+            btn.textContent = '✓ Message Sent!';
+            btn.style.background = '#22c55e';
+            setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);
+        }
+
+        // Gallery hover effect
+        document.querySelectorAll('.exp-img img').forEach(img => {
+            img.parentElement.addEventListener('mouseenter', () => img.style.transform = 'scale(1.05)');
+            img.parentElement.addEventListener('mouseleave', () => img.style.transform = '');
+        });
+
+        // Nav active state on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let scrollY = window.scrollY;
+            sections.forEach(sec => {
+                const top = sec.offsetTop - 100;
+                const bottom = top + sec.offsetHeight;
+                const link = document.querySelector(`.nav-links a[href="#${sec.id}"]`);
+                if (link) link.style.color = (scrollY >= top && scrollY < bottom) ? 'var(--text)' : '';
+            });
+        });
+    </script>
+</body>
+
+</html>
